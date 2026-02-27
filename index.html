@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor Encantado </title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        barlow: ['Barlow', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#da9e6d',
+                        dark: '#333333'
+                    }
+                }
+            }
+        }
+    </script>
+
+    </script>
+
+    <!-- animação do botão hamburguer -->
+    <style>
+        /* Primeira barra gira */
+        #btn-mobile.active span:nth-child(1) {
+            transform: rotate(45deg) translateY(8px);
+        }
+
+        /* Barra do meio some */
+        #btn-mobile.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        /* Última barra gira */
+        #btn-mobile.active span:nth-child(3) {
+            transform: rotate(-45deg) translateY(-8px);
+        }
+    </style>
+
+</head>
+
+
+<body class="font-barlow text-[#222222] bg-gray-100">
+
+    <!-- ================= HEADER ================= -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center">
+
+                <!-- Logo -->
+                <a href="#" class="flex items-center py-4 px-2">
+                    <img src="./assets/images/logo.png" alt="Haruy Sushi">
+                </a>
+
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#" class="py-4 px-2 text-primary border-b-4 border-primary font-semibold">
+                        Cardápio
+                    </a>
+                    <a href="#"
+                        class="py-4 px-2 text-gray-500 font-semibold hover:text-primary transition duration-300">
+                        Sobre
+                    </a>
+                    <a href="#"
+                        class="py-4 px-2 text-gray-500 font-semibold hover:text-primary transition duration-300">
+                        Contato
+                    </a>
+                </div>
+
+                <!-- Botão Hambúrguer Mobile -->
+                <div class="md:hidden flex items-center">
+                    <button id="btn-mobile" class="flex flex-col justify-center items-center w-8 h-8 space-y-1">
+
+                        <!-- 3 Barras -->
+                        <span class="block w-6 h-0.5 bg-gray-600 transition-all duration-300"></span>
+                        <span class="block w-6 h-0.5 bg-gray-600 transition-all duration-300"></span>
+                        <span class="block w-6 h-0.5 bg-gray-600 transition-all duration-300"></span>
+
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div class="hidden md:hidden bg-white shadow-md" id="menu-mobile">
+            <ul>
+                <li>
+                    <a href="#" class="block text-sm px-4 py-3 text-white bg-primary font-semibold">
+                        Cardápio
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="block text-sm px-4 py-3 hover:bg-primary hover:text-white transition duration-300">
+                        Sobre
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="block text-sm px-4 py-3 hover:bg-primary hover:text-white transition duration-300">
+                        Contato
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ================= SCRIPT DO MENU ================= -->
+    <script>
+        const btn = document.getElementById('btn-mobile');
+        const menu = document.getElementById('menu-mobile');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden'); // Mostra/esconde menu
+            btn.classList.toggle('active');  // Ativa animação X
+        });
+    </script>
+
+
+    <!-- BANNER -->
+    <section class="w-full text-center mt-10 px-6 md:px-0">
+        <div class="flex flex-col md:flex-row items-center justify-center">
+
+            <div class="w-full md:w-[45%] mb-8 md:mb-0">
+                <p class="text-2xl md:text-[40px] md:text-left md:px-24">
+                    O verdadeiro sabor da Padaria Brasileira!
+                </p>
+
+                <div class="mt-6">
+                    <a href="#cardapio"
+                        class="border border-dark rounded-xl px-6 py-4 text-lg hover:bg-primary hover:text-white transition">
+                        VEJA O CARDÁPIO
+                    </a>
+                </div>
+            </div>
+
+            <div class="w-full md:w-[45%]">
+                <img src="./assets/images/banner.png" alt="Prato" class="w-[90%] mx-auto">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CARDÁPIO -->
+    <section id="cardapio"
+        class="border-t border-dashed border-gray-400 w-full max-w-[700px] mx-auto mt-24 pt-12 pb-4 px-4 text-center">
+
+        <h1 class="text-3xl font-bold mb-6">Cardápio</h1>
+
+        <!--Menu Categoria Início-->
+        <nav id="nav-categorias" class="overflow-x-auto whitespace-nowrap snap-x flex gap-2 mt-6 pb-1">
+            <button data-cat="paes"
+                class="snap-start px-4 py-1 rounded-full bg-primary text-white font-bold text-sm transition-transform duration-150 cursor-pointer flex-shrink-0 btn-cat">
+                Pães
+            </button>
+            <button data-cat="doces"
+                class="snap-start px-4 py-1 rounded-full bg-primary text-white font-bold text-sm transition-transform duration-150 cursor-pointer flex-shrink-0 btn-cat">
+                Doces
+            </button>
+            <button data-cat="bebidas"
+                class="snap-start px-4 py-1 rounded-full bg-primary text-white font-bold text-sm transition-transform duration-150 cursor-pointer flex-shrink-0 btn-cat">
+                Bebidas
+            </button>
+            <button data-cat="salgados"
+                class="snap-start px-4 py-1 rounded-full bg-primary text-white font-bold text-sm transition-transform duration-150 cursor-pointer flex-shrink-0 btn-cat">
+                Salgados
+            </button>
+        </nav>
+        <!--Menu Categoria Fim-->
+
+
+        <!-- Categoria: Sushi -->
+        <div id="cat-paes" class="categoria-conteudo">
+            <div class="text-left text-primary text-xl mt-12">
+                Pães
+            </div>
+
+            <!-- Itens -->
+            <div class="text-left mt-6 space-y-6">
+
+                <div>
+                    <div class="font-bold text-lg">Pão Francês 🥖</div>
+                    <div class="text-xs text-primary">R$ 12,00/kg</div>
+                    <div class="text-xs text-gray-400">
+                        Casca crocante, miolo macio e leve. É o pão mais tradicional para o café da manhã.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Pão de Forma 🍞</div>
+                    <div class="text-xs text-primary">R$ 8,00 </div>
+                    <div class="text-xs text-gray-400">
+                        Macio, fatiado e ideal para sanduíches e torradas. Pacote de 500g.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Pão Integral 🥯</div>
+                    <div class="text-xs text-primary">R$ 12,00</div>
+                    <div class="text-xs text-gray-400">
+                        Feito com farinha integral, rico em fibras e com sabor mais intenso. Pacote de 500g.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Pão Australiano 🍞</div>
+                    <div class="text-xs text-primary">R$ 20,00</div>
+                    <div class="text-xs text-gray-400">
+                        Escuro, levemente adocicado, feito com mel ou açúcar mascavo. Pacote de 400g.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Pão de Leite 🌭</div>
+                    <div class="text-xs text-primary">R$ 8,00</div>
+                    <div class="text-xs text-gray-400">
+                        Macio e levemente adocicado, usado para lanches. Pacote com 6 unidades.
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="font-bold text-lg">Bisnaguinha 🧈</div>
+                    <div class="text-xs text-primary">R$ 10,00</div>
+                    <div class="text-xs text-gray-400">
+                        Pequenos pãezinhos macios e levemente adocicados. Pacote de 300g.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--Categoria: Bebidas-->
+        <div id="cat-bebidas" class="categoria-conteudo hidden">
+            <div class="text-left text-primary text-xl mt-12">
+                Bebidas
+            </div>
+            <div class="text-left mt-6 space-y-6">
+
+                <div>
+                    <div class="font-bold text-lg">Café Expresso ☕️</div>
+                    <div class="text-xs text-primary">R$ 8,00</div>
+                    <div class="text-xs text-gray-400">Café forte e concentrado, servido em dose pequena. Tradicional para começar o dia.</div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Café com Leite ☕️</div>
+                    <div class="text-xs text-primary">R$ 12,00</div>
+                    <div class="text-xs text-gray-400">Espresso com leite vaporizado, sabor suave e cremoso.</div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Cappuccino ☕️</div>
+                    <div class="text-xs text-primary">R$ 17,00</div>
+                    <div class="text-xs text-gray-400">Café espresso com leite espumado e toque de chocolate, ideal para manhãs frias.</div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Suco Natural 🍹</div>
+                    <div class="text-xs text-primary">R$ 12,00</div>
+                    <div class="text-xs text-gray-400">Sucos feitos na hora, com frutas frescas.</div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Água Mineral 🥤</div>
+                    <div class="text-xs text-primary">R$ 5,00</div>
+                    <div class="text-xs text-gray-400">Opção refrescante e leve, ideal com qualquer lanche.</div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Refrigerante 🥤</div>
+                    <div class="text-xs text-primary">R$ 8,00</div>
+                    <div class="text-xs text-gray-400">Bebidas gaseificadas como Coca-Cola, Guaraná, Fanta, Sprite. Garrafa 600 ml.</div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--Categoria: Doces-->
+        <div id="cat-doces" class="categoria-conteudo hidden">
+            <div class="text-left text-primary text-xl mt-12">
+                Doces
+            </div>
+            <div class="text-left mt-6 space-y-6">
+                
+                <div>
+                    <div class="font-bold text-lg">Bolo de Cenoura com Cobertura de Chocolate 🍰</div>
+                    <div class="text-xs text-primary">R$ 15,50</div>
+                    <div class="text-xs text-gray-400">
+                        Pedaço de bolo macio de cenoura, coberto com ganache de chocolate.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Pudim de Leite Condensado 🍮</div>
+                    <div class="text-xs text-primary">R$ 12,00</div>
+                    <div class="text-xs text-gray-400">
+                        Sobremesa gelatinosa e cremosa, com calda caramelizada.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Cookies 🍪</div>
+                    <div class="text-xs text-primary">R$ 9,90</div>
+                    <div class="text-xs text-gray-400">
+                        Cookies grandes, crocantes por fora e macios por dentro.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Torta de Morango 🍓</div>
+                    <div class="text-xs text-primary">R$ 18,00</div>
+                    <div class="text-xs text-gray-400">
+                        Massa recheada com creme e coberta com morangos frescos.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Cupcake 🧁</div>
+                    <div class="text-xs text-primary">R$ 9,00</div>
+                    <div class="text-xs text-gray-400">
+                        Pequeno bolo individual decorado com cobertura de creme.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Bolo Gelado 🍰</div>
+                    <div class="text-xs text-primary">R$ 12,00</div>
+                    <div class="text-xs text-gray-400">
+                        Bolo coberto com calda e confeitado, geralmente servido frio.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--Categoria: Salgados-->
+        <div id="cat-salgados" class="categoria-conteudo hidden">
+            <div class="text-left text-primary text-xl mt-12">
+                Salgados
+            </div>
+            <div class="text-left mt-6 space-y-6">
+
+                <div>
+                    <div class="font-bold text-lg">Coxinha de Frango 🍗</div>
+                    <div class="text-xs text-primary">R$ 10,00</div>
+                    <div class="text-xs text-gray-400">
+                        Massa leve e crocante por fora, recheio de frango desfiado temperado.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Empada de Frango / Palmito / Queijo 🧀</div>
+                    <div class="text-xs text-primary">R$ 12,00</div>
+                    <div class="text-xs text-gray-400">
+                        Massa quebradiça com recheio cremoso (frango, palmito ou queijo).
+                    </div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Pastel de Forno 🥟</div>
+                    <div class="text-xs text-primary">R$ 10,00</div>
+                    <div class="text-xs text-gray-400">
+                        Massa assada com recheios variados (carne, queijo, pizza, calabresa).
+                    </div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Enroladinho de Salsicha 🥖</div>
+                    <div class="text-xs text-primary">R$ 8,00</div>
+                    <div class="text-xs text-gray-400">
+                        Massa leve envolvendo salsicha, ideal para lanche rápido.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-lg">Sanduíche Natural 🥪</div>
+                    <div class="text-xs text-primary">R$ 15,00</div>
+                    <div class="text-xs text-gray-400">
+                        Pão de forma com recheios leves (frango, atum, legumes).
+                    </div>
+                </div>
+
+        
+            </div>
+        </div>
+
+
+
+
+
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-24 text-center py-12 text-sm text-white bg-dark">
+        <h3 class="text-lg font-bold mb-2">Sabor Encantado</h3>
+        <p>Rua Prof. Toledo, 500, centro - Sorocaba</p>
+        <p>WhatsApp: (15) 98765-4321</p>
+        <p>Aberto todos os dias das 06h às 15h</p>
+    </footer>
+
+    <!-- BOTÃO WHATSAPP -->
+    <a href="https://wa.me/5515987654321" target="_blank" class="fixed bottom-5 right-5">
+        <img src="./assets/images/whatsapp.png" alt="Link WhatsApp" class="h-[60px]">
+    </a>
+
+    <!-- script para botão categoria -->
+    <script>
+        const botoes = document.querySelectorAll('.btn-cat');
+        const conteudos = document.querySelectorAll('.categoria-conteudo');
+        
+        function mudarCategoria(cat){
+            //mostra apenas a categoria selecionada
+            conteudos.forEach(div => {
+                div.id === 'cat-' + cat
+                ? div.classList.remove('hidden')
+                : div.classList.add('hidden');
+            });
+            //atualiza estilo do botão ativo
+            botoes.forEach(btn => {
+                if (btn.dataset.cat === cat){
+                    btn.classList.add('bg-primary', 'text-white');
+                    btn.classList.remove('bg-[#ebebeb]', 'text-dark');
+                }else{
+                    btn.classList.remove('bg-primary', 'text-white');
+                    btn.classList.add('bg-[#ebebeb]', 'text-dark');
+                }
+            });
+        }
+        // //adiciona eventos a cada botao
+        // botoes.forEach(btn => {
+        //     btn.addEventListener('touchstart', () => {
+        //         btn.classList.add('scale-95');
+        //         mudarCategoria(btn.dataset.cat);
+        //     });
+        //     btn.addEventListener('touchend', () => {
+        //         btn.classList.remove('scale-95');
+        //     });
+        //     btn.addEventListener('click', () => {
+        //         mudarCategoria(btn.dataset.cat);
+        //     });
+        // });
+
+        //ativar scroll suave para links internos
+        let startX = 0;
+        let startY = 0;
+
+        //evento de cada botão
+        botoes.forEach(btn => {
+            //touchstart é disparado assim que o dedo toca a tela
+            btn.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                //aplica class tailwind para efeito de clique
+                btn.classList.add('scale-95', 'opacity-80');
+            });
+            //touchend quando tira o dedo da tela
+            btn.addEventListener('touchend', (e) => {
+                //remove efeito visual
+                btn.classList.remove('scale-95', 'opacity-80');
+                //ultima posição do dedo antes de levantar
+                const endX = e.changedTouches[0].clientX;
+                const endY = e.changedTouches[0].clientY;
+                //calcula distância percorrida pelo dedo em pixels
+                const deltaX = Math.abs(endX - startX);
+                const deltaY = Math.abs(endY - startY);
+                //logica matemática se movel menos de 10px = clique intensional
+                if (deltaX < 10 && deltaY < 10){
+                    mudarCategoria(btn.dataset.cat);
+
+                }
+                
+            });
+            //touchcancel se o celular aparecer uma ligação ou notificação popup
+            btn.addEventListener('touchcancel', () => {
+                btn.classList.remove('scale-95', 'opacity-80');
+            });
+            //click para usuários desktop
+            btn.addEventListener('click', ()=> {
+                mudarCategoria(btn.dataset.cat);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
